@@ -33,3 +33,22 @@ export const Patches = [
     { "id": 32, "shape": [""], "money": 0, "cost": { "money": 0, "time": 3 } },
     { "id": 33, "shape": [""], "money": 2, "cost": { "money": 7, "time": 2 } }
 ];
+export const TimeBoardBaseLayout = {
+    "size": 54,
+    "checkpoints": [
+        { "type": "money", "position": 5 },
+        { "type": "money", "position": 11 },
+        { "type": "money", "position": 17 },
+        { "type": "patch", "position": 20 },
+        { "type": "money", "position": 23 },
+        { "type": "patch", "position": 26 },
+        { "type": "money", "position": 29 },
+        { "type": "patch", "position": 32 },
+        { "type": "money", "position": 35 },
+        { "type": "money", "position": 41 },
+        { "type": "patch", "position": 44 },
+        { "type": "money", "position": 47 },
+        { "type": "patch", "position": 50 },
+        { "type": "money", "position": 53 }
+    ]
+}
