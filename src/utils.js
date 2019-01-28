@@ -24,3 +24,10 @@ export const shuffle = (arr) => {
     }
     return arr;
 }
+export const clamp = function(num, min, max) {
+    if (!max) {
+        max = min;
+        min = 0;
+    }
+    return Math.min(Math.max(num, min), max);
+}
