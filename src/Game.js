@@ -6,6 +6,7 @@ import PlayerBoard from './UI/PlayerBoard';
 import PlayerStats from './UI/PlayerStats';
 import TimeBoard from './UI/TimeBoard';
 import { TimeBoardBaseLayout } from './Data';
+import './patrones.css';
 class Game extends Component {
     constructor(props) {
         super(props);
@@ -78,7 +79,7 @@ class Game extends Component {
             <div className="main">
                 <PlayerStats activePlayer={this.state.activePlayer} players={this.state.players} />
                 <PlayerBoard  />
-                <button onClick={() => this.handleAction()}>AVANZAR</button>
+                <button onClick={() => this.handleAction()}>DESCANSAR</button>
                 <PatchesBoard playerMoney={this.state.activePlayer.money} patchList={this.state.patchList} onBuyPatch={this.handleBuyPatch} />
             </div>
             <TimeBoard players={this.state.players} />

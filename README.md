@@ -12,4 +12,4 @@ POSICIONAR PIEZAS:
 DATOS:
     - Datos de piezas en .json de datos maestros y mostrar piezas en UI
 FUTURO:
-- Multiplayer  
+    - Multiplayer
