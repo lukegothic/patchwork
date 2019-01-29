@@ -6,3 +6,6 @@
     font-weight: bold;
     text-shadow: 0 0 3px #000,0 0 3px #000,0 0 3px #000,0 0 3px #000,0 0 3px #000;
 }
+.selected {
+    background: #613;
+}

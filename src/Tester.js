@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { Patches } from './Data';
 import { Range } from './utils';
 import './tester.css';
+const MaxReducer = (max, dim) => max < dim ? dim : max;
 const TestPatch = ({patch}) => {
     if (patch !== null) {
         const blockSize = 40;
-        const h = patch.shape.length;
-        const w = patch.shape[0].length;
+        const h = patch.vertex.map(v => v[1]).reduce(MaxReducer, 0) + 1;
+        const w = patch.vertex.map(v => v[0]).reduce(MaxReducer, 0) + 1;
         // calculate clipPath --> parejas de (x y)
         let clipPath = [];
         // 1. expandir vertices a 2d (cuadrados)
@@ -25,10 +26,12 @@ const TestPatch = ({patch}) => {
         lines = lines.filter(l => !lines.find(lfind => l[0][0] === lfind[1][0] && l[0][1] === lfind[1][1] && l[1][0] === lfind[0][0] && l[1][1] === lfind[0][1]));
         console.log(lines);
         // 4. calcular el path de dibujado
-        let currentLine = lines[0];
-        while (!clipPath.find(cp => currentLine[0][0] == cp[0] && currentLine[0][1] == cp[1])) {
-            clipPath.push(currentLine[0]);
-            currentLine = lines.find(l => currentLine[1][0] == l[0][0] && currentLine[1][1] == l[0][1]);
+        const isRepeatedPath = () => clipPath.find(cp => currentPath[0][0] === cp[0] && currentPath[0][1] === cp[1]);
+        const nextPath = () => lines.find(l => currentPath[1][0] === l[0][0] && currentPath[1][1] === l[0][1]);
+        let currentPath = lines[0];
+        while (!isRepeatedPath()) {
+            clipPath.push(currentPath[0]);
+            currentPath = nextPath(); 
         }
         console.log(clipPath);
         // 5. convertir cliPath a css
@@ -43,7 +46,11 @@ const TestPatch = ({patch}) => {
             "lineHeight": `${h * blockSize}px`,
             "clipPath": clipPath
         }
-        return <div className="patch" style={style}>{w}x{h}</div>
+        return <div>
+                    <div className="patch" style={style}>{w}x{h}</div>
+                    <div>Buttons = {patch.money}</div>
+                    <div>Cost = Money:{patch.cost.money} Time:{patch.cost.time}</div>
+                </div>
     } else {
         return null;
     }
@@ -81,7 +88,7 @@ class Tester extends Component {
     }
     render = () => {
         return <div>
-                    <div className="patchList">{Patches.map(p => <button onClick={()=>this.handlePatchClick(p)}>{p.id}</button>)}</div>
+                    <div className="patchList">{Patches.map(p => <button className={this.state.patch && this.state.patch.id === p.id && "selected"} onClick={()=>this.handlePatchClick(p)}>{p.id}</button>)}</div>
                     <div className="patchPreview"><TestPatch patch={this.state.patch} />
                         <button onClick={() => this.rotate(-1)}>CCW</button>
                         <button onClick={() => this.rotate(1)}>CW</button>
