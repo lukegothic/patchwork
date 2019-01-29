@@ -2,7 +2,20 @@ import React, { Component } from 'react';
 import { Patches } from './Data';
 import { Range } from './utils';
 import './tester.css';
+/*
+todo: map fn
+const Rotate = () => 
+const Flip = () => 
+*/
 const MaxReducer = (max, dim) => max < dim ? dim : max;
+const MinReducer = (min, dim) => min > dim ? dim : min;
+const MoveToOrigin = (fig) => {
+    // normalizar a 0,0
+    const minx = fig.map(v => v[0]).reduce(MinReducer, 0);
+    const miny = fig.map(v => v[1]).reduce(MinReducer, 0);
+    const normV = [Math.abs(minx), Math.abs(miny)];
+    return fig.map(v => [v[0]+normV[0], v[1]+normV[1]]);
+}
 const TestPatch = ({patch}) => {
     if (patch !== null) {
         const blockSize = 40;
@@ -62,21 +75,20 @@ class Tester extends Component {
             patch: null
         }
     }
-    // EjeX: x, EjeY: y
+    // EjeX: 1, EjeY: -1
     flip = (dir) => {
         if (this.state.patch === null) return;
-
+        const patch = Object.assign(this.state.patch, {});
+        patch.vertex = MoveToOrigin(patch.vertex.map(v => [1 * dir * v[0], -1 * dir * v[1]]));       
+        this.setState({
+            patch: patch
+        });
     }
     // CW: 1, CCW: -1
     rotate = (dir) => {
         if (this.state.patch === null) return;
         const patch = Object.assign(this.state.patch, {});
-        const w = patch.shape[0].length;
-        const h = patch.shape.length;
-        const yRange = Range(0, w-1).sort((a,b) => (a - b) * dir);
-        const xRange = Range(0, h-1).sort((a,b) => (b - a) * dir);
-        const shape = yRange.map(y => xRange.map(x => patch.shape[x][y]));
-        patch.shape = shape;
+        patch.vertex = MoveToOrigin(patch.vertex.map(v => [-1 * dir * v[1], 1 * dir * v[0]]));
         this.setState({
             patch: patch
         });
@@ -92,6 +104,8 @@ class Tester extends Component {
                     <div className="patchPreview"><TestPatch patch={this.state.patch} />
                         <button onClick={() => this.rotate(-1)}>CCW</button>
                         <button onClick={() => this.rotate(1)}>CW</button>
+                        <button onClick={() => this.flip(1)}>Flip X</button>
+                        <button onClick={() => this.flip(-1)}>Flip Y</button>
                     </div>
                 </div>
     }

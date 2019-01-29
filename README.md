@@ -7,9 +7,8 @@ TODO:
 POSICIONAR PIEZAS:
     - Tablero
     - Posicionar piezas
+    - Rotar + Flip
     - Asignar bonus primer 7x7
     - Finalizar juego + recuento
-DATOS:
-    - Datos de piezas en .json de datos maestros y mostrar piezas en UI
 FUTURO:
     - Multiplayer
