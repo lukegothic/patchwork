@@ -61,11 +61,12 @@
 * Game Loop
 * [x] Comenzar juego
 * [ ] Finalizar juego
-* UI - Pantalla config
-* [ ] Modo de juego
-* [ ] Opciones
-* UI - Pantalla juego
-* [ ] Info de jugador
-* [ ] Tablero de jugador + alternar entre un jugador y otro
-* [ ] Mercado de piezas
-* [ ] Tablero de tiempo
+* UI
+    * Pantalla de configuracion
+    * [ ] Modo de juego
+    * [ ] Opciones
+    * Pantalla de juego
+    * [ ] Info de jugador
+    * [ ] Tablero de jugador + alternar entre un jugador y otro
+    * [ ] Mercado de piezas
+    * [ ] Tablero de tiempo
