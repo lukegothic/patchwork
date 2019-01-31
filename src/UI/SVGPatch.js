@@ -1,6 +1,5 @@
 import React from 'react';
-import PriceTag from './PriceTag';
-import { Range } from '../utils';
+import { BlockSize } from '../Const';
 const RotateCW = v => [-1 * v[1], v[0]];
 const RotateCCW = v => [v[1], -1 * v[0]];
 const FlipX = v => [v[0], -1 * v[1]];
@@ -21,17 +20,7 @@ const PatchPattern = <pattern id="pattern" x="10" y="10" width="20" height="20" 
                         <circle cx="10" cy="10" r="10" style={{stroke:"none", fill: "#0000ff"}}/>
                     </pattern>;
 // TODO: MarketPatch y PlayerPatch
-const Patch = ({ id, money, cost, vertex, playerMoney, onClick }) => {
-    /* forma antigua de dibujar con clippath
-    let clip = ["webkitClipPath", "clipPath"].reduce((acc, cur) => {
-        acc[cur] = "polygon(10% 25%, 35% 25%, 35% 0%, 65% 0%, 65% 25%, 90% 25%, 90% 50%, 65% 50%, 65% 100%, 35% 100%, 35% 50%, 10% 50%)";
-        return acc;
-    }, {});
-    console.log(clip);
-    
-    return <div style={clip} className={`patch bg${data.id}${onClick ? (playerMoney >= data.cost.money ? " buyable" : " notbuyable") : ""}`} onClick={onClick}>{(data.cost.money + data.cost.time > 0) && <PriceTag cost={data.cost} />}<div className="money">{Range(1, data.money).map(i => <i className="fa fa-dot-circle" />)}</div></div>;
-    */
-    const blockSize = 40;
+const Patch = ({ vertex }) => {
     const h = vertex.map(v => v[1]).reduce(MaxReducer, 0) + 1;
     const w = vertex.map(v => v[0]).reduce(MaxReducer, 0) + 1;
     // calculate clipPath --> parejas de (x,y)
@@ -56,17 +45,6 @@ const Patch = ({ id, money, cost, vertex, playerMoney, onClick }) => {
         clipPath.push(currentPath[0]);
         currentPath = nextPath(); 
     }
-    // 5. convertir cliPath a css
-    const cssClipPath = (clipPath.length > 0) ? `polygon(${clipPath.map(pos => `${pos[0]*blockSize}px ${pos[1]*blockSize}px`).join(",")})` : "";
-    const style = {
-        "width": w * blockSize,
-        "height": h * blockSize,
-        "lineHeight": `${h * blockSize}px`,
-        "clipPath": cssClipPath
-    }
-    return <svg className="patch" height={style.height} width={style.width} onClick={onClick}>
-            <defs>{PatchPattern}</defs>
-            <polygon className="testpatch" points={clipPath.map(pos => `${pos[0]*blockSize},${pos[1]*blockSize}`).join(" ")} />
-            </svg>
+    return <polygon className="patch" points={clipPath.map(pos => `${pos[0]*BlockSize},${pos[1]*BlockSize}`).join(" ")} />
 }
 export default Patch;

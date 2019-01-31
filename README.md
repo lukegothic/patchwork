@@ -35,13 +35,14 @@
     * [ ] Preview tiempo y dinero
 * Tablero de tiempo
     * [x] Generar tablero
-    * Colocar piezas en tablero
-    * [ ] Colocacion de pieza en tablero de jugador
-    * [ ] Ayuda visual
+* Colocar piezas en tablero
+    * [x] Generar tablero
+    * [ ] Colocacion de pieza comprada en tablero de jugador
+    * [ ] Ayuda visual (incluido comprobacion de si se puede colocar o no)
+    * [ ] Calcular bonus 7x7
 * Piezas
     * [x] Modelado a través de vertices (1d => 2d)
-    * [ ] Rotar y Flip
-    * [ ] Calcular bonus 7x7
+    * [x] Rotar y Flip
 * Game Loop
     * [x] Comenzar juego
     * [ ] Finalizar juego
