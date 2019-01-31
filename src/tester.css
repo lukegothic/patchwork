@@ -9,9 +9,10 @@
     stroke: aqua;
     stroke-width: 3px;
     stroke-dasharray: 1;
+    fill: url(#pattern);
 }
 .testpattern1 {
-    fill: url(#xxx);
+    
 }
 .selected {
     background: #613;
