@@ -2,41 +2,24 @@
 ###### Réplica digital del juego de mesa "Patchwork", permite juego local y online
 <hr />
 
-<h2>Mejoras sobre la version de tablero</h2>
-<ul>
-    <li>Automatización de procesos
-        <ul>
-            <li>Setup (mercado, tablero de tiempo)</li>
-            <li>Previsualización de estado futuro (tiempo y dinero) por pieza</li>
-            <li>Avance por indicador de tiempo y recogida de bonuses automática (pieza 1x1 y pago)</li>
-            <li>Recogida automática de bonus 7x7</li>
-        </ul>
-    </li>
-    <li>Ayuda visual a la hora de colocar piezas</li>
-    <li>Nuevas opciones de juego
-        <ul>
-            <li>Tablero de tiempo
-                <ul>
-                    <li>Modo clásico</li>
-                    <li>Aleatorio</li>
-                </ul>
-            </li>
-            <li>Piezas
-                <ul>
-                    <li>Modo clásico</li>
-                    <li>Aleatorio</li>
-                </ul>
-            </li>
-            <li>Tamaño de tablero de jugador</li>
-        </ul>
-    </li>
-    <li>Modos de juego
-        <ul>
-            <li>Juego en solitario contra IA</li>
-            <li>Juego online</li>
-        </ul>
-    <li>
-</ul>
+## Mejoras sobre la version de tablero
+* Automatización de procesos
+    * Setup (mercado, tablero de tiempo)
+    * Previsualización de estado futuro (tiempo y dinero) por pieza
+    * Avance por indicador de tiempo y recogida de bonuses automática (pieza 1x1 y pago)
+    * Recogida automática de bonus 7x7
+* Ayuda visual a la hora de colocar piezas
+* Nuevas opciones de juego
+    * Tablero de tiempo
+        * Modo clásico
+        * Aleatorio
+    * Piezas
+        * Modo clásico
+        * Aleatorio
+    * Tamaño de tablero de jugador configurable
+* Modos de juego
+    * Juego en solitario contra IA
+    * Juego online
 
 ## TODO
 * Modelado de datos (BD,JSON,otros)
