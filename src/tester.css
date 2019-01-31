@@ -11,9 +11,6 @@
     stroke-dasharray: 1;
     fill: url(#pattern);
 }
-.testpattern1 {
-    
-}
 .selected {
     background: #613;
 }

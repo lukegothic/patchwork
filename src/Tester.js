@@ -17,6 +17,9 @@ const MoveToOrigin = (fig) => { // mover la pieza a las coordenadas (0,0)
     // calcular vectores normalizados
     return fig.map(v => [v[0]+normV[0], v[1]+normV[1]]);
 }
+const PatchPattern = <pattern id="pattern" x="10" y="10" width="20" height="20" patternUnits="userSpaceOnUse" >
+                        <circle cx="10" cy="10" r="10" style={{stroke:"none", fill: "#0000ff"}}/>
+                    </pattern>;
 const DrawPatch = ({patch}) => {
     if (patch !== null) {
         const blockSize = 40;
@@ -52,18 +55,8 @@ const DrawPatch = ({patch}) => {
             "lineHeight": `${h * blockSize}px`,
             "clipPath": cssClipPath
         }
-        /*return <div>
-                    <div className="patch" style={style}>{w}x{h}</div>
-                    <div>Buttons = {patch.money}</div>
-                    <div>Cost = Money:{patch.cost.money} Time:{patch.cost.time}</div>
-                </div>*/
-                //</svg><defs><pattern id="pattern" patternUnits="userSpaceOnUse" width="10" height="10"><image xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCc+CiAgPHJlY3Qgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBmaWxsPSd3aGl0ZScgLz4KICA8cmVjdCB4PScwJyB5PScwJyB3aWR0aD0nOScgaGVpZ2h0PSc5JyBmaWxsPSdibGFjaycgLz4KPC9zdmc+" x="0" y="0" width="10" height="10"></image></pattern></defs>
-        return <svg height={style.height} width={style.width}>        
-                <defs>
-                    <pattern id="pattern" x="10" y="10" width="20" height="20" patternUnits="userSpaceOnUse" >
-                        <circle cx="10" cy="10" r="10" style={{stroke:"none", fill: "#0000ff"}}/>
-                    </pattern>
-                </defs>
+        return <svg height={style.height} width={style.width}>
+                <defs>{PatchPattern}</defs>
                 <polygon className="testpatch" points={clipPath.map(pos => `${pos[0]*blockSize},${pos[1]*blockSize}`).join(" ")} />
                 </svg>
     } else {
