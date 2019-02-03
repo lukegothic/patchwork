@@ -1,3 +1,3 @@
 import React from 'react';
-const PlayerTime = ({player}) => <div className={`player p${player}`}></div>
+const PlayerTime = ({ player }) => <div className={`player ${player}`}></div>
 export default PlayerTime;

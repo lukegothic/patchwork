@@ -6,17 +6,19 @@ import Market from './UI/Market';
 import PlayerBoard from './UI/PlayerBoard';
 import PlayerStats from './UI/PlayerStats';
 import TimeBoard from './UI/TimeBoard';
+import EndGame from './UI/EndGame';
 import { TimeBoardBaseLayout } from './Data';
 import './patrones.css';
 class Game extends Component {
     constructor(props) {
         super(props);
-        const players = ["p1", "p2"].map(name => ({ 
+        const players = ["p1", "p2"].map((name, i) => ({ 
+            "id": i,
             "name": name,
             "position": 0,
             "money": 5,
             "first7x7": false,
-            "patches": [
+            "patches": [] /*[
                 { 
                     "id": 1, 
                     "money": 0, 
@@ -31,23 +33,24 @@ class Game extends Component {
                     "vertex": [[1,0],[0,1],[1,1],[0,2],[0,3]],
                     "at": [1, 2]
                 }
-            ],
+            ]*/,
             "state": PlayerState.IDLE
         }));
         this.state = {
             patchList: this.generatePatchList(),
-            players: players,
-            activePlayer: players[RandomInt(2)],
+            players: shuffle(players),
+            patchIntent: null,
+            // lo siguiente es cfg
             timeboard: {
                 "size": TimeBoardBaseLayout.size,
-                "checkpoints": TimeBoardBaseLayout.checkpoints.slice()
+                "checkpoints": TimeBoardBaseLayout.checkpoints.map((cp, i) => Object.assign({ "id": `cp${i}` }, cp))
             },
             playerboard: {
                 "size": {
                     "w": 9,
                     "h": 9
                 }
-            }
+            }            
         }
     }
     generatePatchList = () => {
@@ -56,10 +59,61 @@ class Game extends Component {
         otherPatches = shuffle(otherPatches);
         return otherPatches.concat(initialPatch);
     }
+    getCheckPoint = (from, to) => this.state.timeboard.checkpoints.find(cp => cp.position > from && cp.position <= to && cp.pickedup !== true);
+    performEndTurnActions = (startingPosition) => {
+        this.setState(state => {
+            // 1. Determinar si ha pasado por un chkpoint
+            const checkpoint = this.getCheckPoint(0, state.players[0].position);
+            console.log(checkpoint);
+            if (checkpoint) {
+                switch(checkpoint.type) {
+                    case "money":
+                    
+                    break;
+                    case "patch":
+                    
+                    break;
+                }
+            }
+            if (!checkpoint && checkpoint.type !== "patch") {
+                // 2. Calcular nuevo player activo
+                if (state.players[1].position < state.players[0].position) {
+                    let players = state.players.slice();
+                    return {
+                        players: [players[1], players[0]]
+                    }
+                }
+            }
+            // 3. Detectar fin de juego (es necesario o se saca de los players???)
+        });
+    }
+    handlePass = () => {
+        this.setState(state => {
+            let activePlayer = Object.assign({}, state.players[0]);
+            const otherPlayer = Object.assign({}, state.players[1]);
+            const startingPosition = activePlayer.position;
+            const advance = otherPlayer.position - startingPosition + 1;
+            activePlayer.position += advance;
+            //activePlayer.position = clamp(activePlayer.position, state.timeboard.size - 1);
+            activePlayer.money += advance;
+            return {
+                players: [activePlayer, otherPlayer]
+            }
+        });
+        this.performEndTurnActions(0);
+    }
+    handleBuyPatchIntent = (patch) => {
+        if (patch.cost.money <= this.state.players[0].money) {
+            this.setState({ patchIntent: patch });
+        } else {
+            alert("No tienes suficiente dinero, escoge otra pieza o pulsa 'AVANZAR'");
+        }
+    }
+    handleReturnPatch = () => this.setState(state => ({ patchToBePlaced: null }));
     handleAction = (patch = null) => {
         let players = this.state.players.slice();
-        const activePlayer = players.find(p => p.name === this.state.activePlayer.name);
-        const otherPlayer = players.find(p => p.name !== activePlayer.name);
+        const activePlayer = players[0];
+        const otherPlayer = players[1];
         // detectar accion ilegal
         if (patch !== null && patch.cost.money > activePlayer.money) {
             alert("No tienes suficiente dinero, escoge otra pieza o pulsa 'AVANZAR'");
@@ -70,10 +124,12 @@ class Game extends Component {
             const patchList = this.state.patchList;
             activePlayer.money -= patch.cost.money;
             activePlayer.position += patch.cost.time;
-            let pi = patchList.findIndex(p => p.id === patch.id);
-            activePlayer.patches.push(Object.assign({}, patchList[pi]));
+            const pi = patchList.findIndex(p => p.id === patch.id);
+            //activePlayer.patches.push(Object.assign({}, patchList[pi]));
+            const newPatch = Object.assign({}, patchList[pi]);
             this.setState({
-                patchList: patchList.slice(pi + 1).concat(patchList.slice(0, pi))
+                patchList: patchList.slice(pi + 1).concat(patchList.slice(0, pi)),
+                patchToBePlaced: newPatch
             });
         } else {                // PASS
             const advance = otherPlayer.position - activePlayer.position + 1;
@@ -100,34 +156,23 @@ class Game extends Component {
             activePlayer: (activePlayer.position <= otherPlayer.position) ? activePlayer : otherPlayer
         });
     }
-    handleBuyPatch = (patch) => {
-        this.handleAction(patch);
-    }
-    handleTestPlayerState = () => {
+    handlePlacePatch = (at) => {
         let players = this.state.players.slice();
         const activePlayer = players.find(p => p.name === this.state.activePlayer.name);
-        activePlayer.state = PlayerState.PLACING_PATCH;
+        activePlayer.patches.push(Object.assign(this.state.patchIntent, { "at": at }));
         this.setState({
-            "players": players
+            "players": players,
+            "patchIntent": null
         });
-    }
-    handlePlacePatch = (tile) => {
-        let players = this.state.players.slice();
-        const activePlayer = players.find(p => p.name === this.state.activePlayer.name);
-        activePlayer.patches.push({ id: +(+new Date()), money: 0, cost: {}, vertex: [[0, 0]], at: tile });
-        activePlayer.state = PlayerState.IDLE;
-        this.setState({
-            "players": players
-        });
+        this.performEndTurnActions();
     }
     render = () => {
         return (<div className="game">
+            {(this.state.players.reduce((acc, curr) => acc + curr.position, 0) === (this.state.timeboard.size - 1) * this.state.players.length) && <EndGame players={this.state.players} />}
             <div className="main">
-                <button onClick={() => this.handleTestPlayerState()}>changestate</button>
-                <PlayerStats activePlayer={this.state.activePlayer} players={this.state.players} />
-                <PlayerBoard size={this.state.playerboard.size} player={this.state.activePlayer} onPlacePatch={this.handlePlacePatch} />
-                <button onClick={() => this.handleAction()}>DESCANSAR</button>
-                <Market playerMoney={this.state.activePlayer.money} patchList={this.state.patchList} onBuyPatch={this.handleBuyPatch} />
+                { this.state.players.map((player, i) => <PlayerBoard active={ i === 0 } size={this.state.playerboard.size} player={player} patch={this.state.patchIntent} onPlacePatch={this.handlePlacePatch} />) }
+                <button onClick={() => this.handlePass()}>DESCANSAR</button>
+                <Market playerMoney={this.state.players[0].money} patchList={this.state.patchList} onBuyPatch={this.handleBuyPatchIntent} />
             </div>
             <TimeBoard players={this.state.players} />
         </div>);

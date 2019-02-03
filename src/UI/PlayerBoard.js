@@ -3,7 +3,8 @@ import { PlayerState } from '../Const';
 import SVGPatch from './SVGPatch';
 import * as FigureHelper from '../FigureHelper';
 import PatchPlacer from './PatchPlacer';
-const PlayerBoard = ({ size, player, onPlacePatch }) => {
+import PlayerInfo from './PlayerInfo';
+const PlayerBoard = ({ size, player, active, patch, onPlacePatch }) => {
     const cssSize = {
         h: size.h * 40,
         w: size.w * 40
@@ -23,12 +24,15 @@ const PlayerBoard = ({ size, player, onPlacePatch }) => {
             }
         </div>
         */
-        <div className="playerboard" style={{ "height": cssSize.h, "width": cssSize.w }}>
-            <svg className="patch" height={cssSize.h} width={cssSize.w}>
+       <div className={`player${active ? " active" : ""}`}>
+           <PlayerInfo player={player} />
+           <div className="playerboard" style={{ "height": cssSize.h, "width": cssSize.w }}>
+            <svg height={cssSize.h} width={cssSize.w}>
                 {player.patches.map(patch => <SVGPatch key={`${player.name}${patch.id}`} vertex={FigureHelper.Move(patch.vertex, patch.at)} />)}
             </svg>
-            {player.state === PlayerState.PLACING_PATCH && <PatchPlacer player={player} size={size} onPlacePatch={onPlacePatch} />}
+            {patch && <PatchPlacer player={player} size={size} patch={patch} onPlacePatch={onPlacePatch} />}
         </div>
+       </div>
     )
 }
 export default PlayerBoard;

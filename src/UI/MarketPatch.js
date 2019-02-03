@@ -1,6 +1,8 @@
 import React from 'react';
 import SVGPatch from './SVGPatch';
 import { BlockSize } from '../Const';
+import PriceTag from './PriceTag';
+import Patch from './SVGPatch';
 const RotateCW = v => [-1 * v[1], v[0]];
 const RotateCCW = v => [v[1], -1 * v[0]];
 const FlipX = v => [v[0], -1 * v[1]];
@@ -24,9 +26,12 @@ const PatchPattern = <pattern id="pattern" x="10" y="10" width="20" height="20" 
 const MarketPatch = ({ id, money, cost, vertex, playerMoney, onClick }) => {
     const h = vertex.map(v => v[1]).reduce(MaxReducer, 0) + 1;
     const w = vertex.map(v => v[0]).reduce(MaxReducer, 0) + 1;
-    return <svg className="patch" height={h*BlockSize} width={w*BlockSize} onClick={onClick}>
-            <defs>{PatchPattern}</defs>
-            <SVGPatch vertex={vertex} />
-            </svg>
+    return <React.Fragment>
+                <svg className="patch" height={h*BlockSize} width={w*BlockSize} onClick={onClick}>
+                <defs>{PatchPattern}</defs>
+                <SVGPatch vertex={vertex} />
+                </svg>
+                <PriceTag cost={cost} />
+            </React.Fragment>
 }
 export default MarketPatch;
