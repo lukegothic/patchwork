@@ -1,7 +1,6 @@
 import React from 'react';
-import { PlayerState } from '../Const';
 import SVGPatch from './SVGPatch';
-import * as FigureHelper from '../FigureHelper';
+import * as BoardHelper from '../BoardHelper';
 import PatchPlacer from './PatchPlacer';
 import PlayerInfo from './PlayerInfo';
 const PlayerBoard = ({ size, player, active, patch, onPlacePatch }) => {
@@ -28,7 +27,7 @@ const PlayerBoard = ({ size, player, active, patch, onPlacePatch }) => {
            <PlayerInfo player={player} />
            <div className="playerboard" style={{ "height": cssSize.h, "width": cssSize.w }}>
             <svg height={cssSize.h} width={cssSize.w}>
-                {player.patches.map(patch => <SVGPatch key={`${player.name}${patch.id}`} vertex={FigureHelper.Move(patch.vertex, patch.at)} />)}
+                {player.patches.map(patch => <SVGPatch key={`${player.name}${patch.id}`} vertex={BoardHelper.MoveFigure(patch.vertex, patch.at)} />)}
             </svg>
             {patch && <PatchPlacer player={player} size={size} patch={patch} onPlacePatch={onPlacePatch} />}
         </div>

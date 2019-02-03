@@ -37,7 +37,7 @@
     * [x] Generar tablero
 * Colocar piezas en tablero
     * [x] Generar tablero
-    * [ ] Colocacion de pieza comprada en tablero de jugador
+    * [ ] Colocacion de pieza comprada en tablero de jugador (falta comprobar colisiones)
     * [ ] Ayuda visual (incluido comprobacion de si se puede colocar o no)
     * [ ] Calcular bonus 7x7
 * Piezas
