@@ -52,7 +52,7 @@ code {
   cursor:not-allowed;
 }
 .patch:hover {
-  
+  cursor:pointer;
 }
 .pricetag {
   display: inline-block;

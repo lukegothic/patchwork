@@ -18,6 +18,7 @@ export const RandomInt = (min, max, inclusive) => {
     return Math.floor(Random(Math.ceil(min), Math.floor(max + (inclusive ? 1 : 0))));
 }
 export const shuffle = (arr) => {
+    arr = arr.slice();
     for (let i = arr.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [arr[i], arr[j]] = [arr[j], arr[i]];
