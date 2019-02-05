@@ -77,7 +77,7 @@ class Game extends Component {
     isEndGame = () => {
         return this.state.players.reduce((acc, curr) => acc + curr.position, 0) === (this.state.cfg.timeboard.size - 1) * this.state.players.length;
     }
-    // GAME ACTIONS
+    // GAME ACTIONS and HANDLERS
     performEndTurnActions = () => {
         this.setState(state => {
             let players = state.players.slice();
@@ -185,7 +185,7 @@ class Game extends Component {
             this.isEndGame()
                 ? <EndGame players={this.state.players} size={this.state.cfg.playerboard.size} onRestart={this.handleRestart} />
                 : <div className="game">
-                    <TimeBoard players={this.state.players} checkpoints={this.state.checkpoints} />
+                    <TimeBoard players={this.state.players} checkpoints={this.state.checkpoints} size={this.state.cfg.timeboard.size} />
                     <div className="players">
                     { this.state.players.map((player, i) =>
                         <Player key={player.name} size={this.state.cfg.playerboard.size} player={player} patch={this.state.patchIntent} onPlacePatch={this.handlePlacePatch} />) }
