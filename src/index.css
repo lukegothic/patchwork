@@ -15,18 +15,23 @@ code {
   display:inline-block;
   margin: 5px;
 }
+.player.active {
+  box-shadow: 0 0 5px green;
+}
 .playerinfo.p1 strong {
   color: #0000ff;
 }
 .playerinfo.p2 strong {
   color: #ff0000;
 }
+.market, .patchEditor {
+  display: inline-block;
+}
 .patchboard {
   width: 220px;
   height: 400px;
   overflow-y: scroll;
   text-align: center;
-  display: inline-block;
 }
 .patchboard .patch {
   display: block;
@@ -34,6 +39,7 @@ code {
   cursor: pointer;
   fill:url(#pattern);
 }
+
 .patch.buyable {
   /*background-color: aquamarine;*/
   cursor: pointer;

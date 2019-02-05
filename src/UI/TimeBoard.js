@@ -9,7 +9,7 @@ const TimeBoard = ({ players }) => {
         <div className="timeboard">{
             Range(0, TimeBoardBaseLayout.size - 1).map(pos => {
                 const checkpoint = TimeBoardBaseLayout.checkpoints.find(cp => cp.position === pos && cp.pickedup !== true);
-                return <TimeBoardSquare key={`ts${pos}`}>{ players.map(player => player.position === pos && <PlayerTime player={player.name} />) }{checkpoint && <TimeBoardCheckpoint key={`tsc${pos}`} checkpoint={checkpoint} />}</TimeBoardSquare>
+                return <TimeBoardSquare key={`ts${pos}`}>{ players.map(player => player.position === pos && <PlayerTime key={`pt${player.name}`} player={player.name} />) }{checkpoint && <TimeBoardCheckpoint key={`tsc${pos}`} checkpoint={checkpoint} />}</TimeBoardSquare>
             })
         }</div>
     );

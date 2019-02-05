@@ -1,8 +1,12 @@
 import React from 'react';
 import Patch from './Patch';
-import MarketPatch from './MarketPatch';
-const Market = ({ patchList, onBuyPatch, playerMoney }) => {
-    // patchList: ultimo = posicion actual; 0, 1 y 2 opciones de compra
-    return <div className="patchboard">{patchList.map((p, i) => <MarketPatch key={p.id} playerMoney={playerMoney} {...p} onClick={ ([0,1,2].indexOf(i) !== -1) ? () => onBuyPatch(p) : undefined } />)}</div>
+import PriceTag from './PriceTag';
+const Market = ({ patches, onBuyPatch, playerMoney }) => {
+    // patches: ultimo = posicion actual; 0, 1 y 2 opciones de compra
+    return <div className="market">
+                <div className="patchcount">{patches.length}</div>
+                <div className="patchboard">{patches.map((p, i) => <Patch key={`market${p.id}`} playerMoney={playerMoney} patch={p} onClick={ ([0,1,2].indexOf(i) !== -1) ? () => onBuyPatch(p) : undefined }><PriceTag cost={p.cost} /></Patch>)}</div>
+                <button onClick={() => onBuyPatch(null)}>DESCANSAR</button>
+            </div>
 }
 export default Market;

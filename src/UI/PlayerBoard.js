@@ -1,37 +1,17 @@
-import React from 'react';
 import SVGPatch from './SVGPatch';
 import * as BoardHelper from '../BoardHelper';
-import PatchPlacer from './PatchPlacer';
-import PlayerInfo from './PlayerInfo';
-const PlayerBoard = ({ size, player, active, patch, onPlacePatch }) => {
-    const cssSize = {
-        h: size.h * 40,
-        w: size.w * 40
+import React from 'react';
+import { BlockSize } from '../Const';
+const PlayerBoard = ({ size, patches, children }) => {
+    const vwSize = {
+        h: size.h * BlockSize,
+        w: size.w * BlockSize
     };
-    return (
-        /*
-        <div className="playerboard" style={{ "height": cssSize.h, "width": cssSize.w }}>
-            {Range(0, size.h - 1).map((x) => {
-                return (
-                    <div className="row" key={`row${x}`} style={{ "height": cssSize.h / size.h }}>
-                        {Range(0, size.w - 1).map((y) => {
-                            let id = x * size.w + y;
-                            return <Cell cellW={cssSize.w / size.w} data={board[id]} onCellClick={onCellClick ? (() => onCellClick(id)): undefined } key={`cell${id}`} />
-                        })}
-                    </div>
-                )})
-            }
-        </div>
-        */
-       <div className={`player${active ? " active" : ""}`}>
-           <PlayerInfo player={player} />
-           <div className="playerboard" style={{ "height": cssSize.h, "width": cssSize.w }}>
-            <svg height={cssSize.h} width={cssSize.w}>
-                {player.patches.map(patch => <SVGPatch key={`${player.name}${patch.id}`} vertex={BoardHelper.MoveFigure(patch.vertex, patch.at)} />)}
-            </svg>
-            {patch && <PatchPlacer player={player} size={size} patch={patch} onPlacePatch={onPlacePatch} />}
-        </div>
-       </div>
-    )
+    return <div className="playerboard" style={{ "height": vwSize.h, "width": vwSize.w }}>
+                <svg height={vwSize.h} width={vwSize.w}>
+                {patches.map(patch => <SVGPatch key={`pp${patch.id}`} vertex={BoardHelper.MoveFigure(patch.vertex, patch.at)} />)}
+                </svg>
+                {children}
+            </div>
 }
 export default PlayerBoard;
