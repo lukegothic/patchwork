@@ -37,7 +37,7 @@
     * [x] Generar tablero
 * Colocar piezas en tablero
     * [x] Generar tablero
-    * [ ] Colocacion de pieza comprada en tablero de jugador (falta comprobar colisiones)
+    * [ ] Colocacion de pieza comprada en tablero de jugador
     * [ ] Ayuda visual (incluido comprobacion de si se puede colocar o no)
     * [ ] Calcular bonus 7x7
 * Piezas
@@ -45,7 +45,7 @@
     * [x] Rotar y Flip
 * Game Loop
     * [x] Comenzar juego
-    * [ ] Finalizar juego
+    * [x] Finalizar juego
 * UI - Pantalla config
     * [ ] Modo de juego
     * [ ] Opciones
@@ -54,3 +54,7 @@
     * [ ] Tablero de jugador + alternar entre un jugador y otro
     * [ ] Mercado de piezas
     * [ ] Tablero de tiempo
+* Juice it up
+    * [ ] Juice it
+    * [ ] More juice
+    * [ ] Best juice

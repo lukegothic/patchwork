@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="theme-color" content="#000000" />
+    <!--
+      manifest.json provides metadata used when your web app is added to the
+      homescreen on Android. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css">
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>Widget App</title>
+    <style>
+        html, body {
+            margin:0;
+            height:100%;
+            width:100%;
+        }
+        #root {
+            display: grid;
+            height:100%;
+        }
+        .progress_s {
+            background-color: aqua;
+            grid-area: progress;
+            position: relative;
+        }
+        .progress_s .stops {
+            display: flex;
+            height: 100%;;
+        }
+        .progress_s .stops .stop {
+            flex: 1 0;
+        }
+        .progress_s .players {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+        }
+        .progress_s .players .player {
+            height: 20px;
+            position: absolute;
+        }
+        .progress_s .players .player.p1 {
+            background-color: #ff0000;
+            top: 10px;
+            width: 33%;
+        }
+        .progress_s .players .player.p2 {
+            background-color: #0000ff;
+            top: 20px;
+            width: 37%;
+        }
+        .progress_s .players .player.active {
+            box-shadow: 1px 1px 3px #000;
+            z-index: 1;
+        }
+        .players_s {
+            background-color: brown;
+            grid-area: players;
+        }
+        .market_s {
+            background-color: chartreuse;
+            grid-area: market;
+            position: relative;
+        }
+        .market_s .items {
+            overflow-x: scroll;
+            display: flex;
+            align-content: stretch;
+            height: 100%;
+            width: 90%;
+        }
+        .market_s .item {
+            flex: 1 0 33.33%;
+        }
+        .market_s .item.sale {
+            background-color: darkblue;           
+        }
+        .market_s .item.next {
+            background-color: darkcyan;
+        }
+        .market_s .viewnext {
+            width: 10%;
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100%;
+            text-align: left;
+            writing-mode: vertical-lr;
+            background-color: grey;
+        }
+        @media screen and (orientation:portrait) {
+            #root {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto 100vw 30vw;
+                grid-template-areas: "progress" "players" "market";
+            }
+        }
+        @media screen and (orientation:landscape) {
+            #root {
+                grid-template-columns: auto 100vh 30vh;
+                grid-template-rows: 1fr;
+                grid-template-areas: "progress players market";
+            }
+        }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+        <div class="progress_s">
+            <div class="stops">
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+                <div class="stop"></div>
+            </div>
+            <div class="players">
+                <div class="player p1"></div>                
+                <div class="player p2"></div>
+            </div>
+        </div>
+        <div class="players_s">
+            
+        </div>
+        <div class="market_s">
+            <div class="items">
+                <div class="item sale"></div>
+                <div class="item sale"></div>
+                <div class="item sale"></div>
+                <div class="item next"></div>
+                <div class="item next"></div>
+                <div class="item next"></div>
+            </div>
+            <div class="viewnext">Siguientes</div>
+        </div>
+    </div>
+  </body>
+</html>
