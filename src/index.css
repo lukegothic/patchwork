@@ -156,6 +156,7 @@ code {
   */
   cursor: pointer;
   position: absolute;
+  transition: all 400ms;
 }
 .playerboard .patchPlacer .tile.dragover {
   background-color: greenyellow;
