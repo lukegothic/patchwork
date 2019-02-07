@@ -23,7 +23,7 @@ const PatchEditor = ({ patch, onEdit, onCancel }) => {
     return <div className="patchEditor">
         <Patch patch={patch}></Patch>
         {!/^bonus.*/.test(patch.id) && 
-        <div class="editcontrols">
+        <div className="editcontrols">
             <button onClick={() => onEdit(applyTransform(patch, FlipX))}>FlipX</button>
             <button onClick={() => onEdit(applyTransform(patch, RotateCCW))}>CCW</button>
             <button onClick={() => onEdit(applyTransform(patch, RotateCW))}>CW</button>
