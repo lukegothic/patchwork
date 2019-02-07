@@ -23,30 +23,30 @@
 
 ## TODO
 * Modelado de datos (BD,JSON,otros)
-    * [x] Piezas
-    * [x] Tablero de tiempo
+    * [x] <strong>Piezas</strong>
+    * [x] <strong>Tablero de tiempo</strong>
 * Modos de juego
-    * [x] Hot-seat
+    * [x] <strong>Hot-seat</strong>
     * [ ] vs IA
     * [ ] Multiplayer
 * Mercado
-    * [x] Generar orden mercado
-    * [x] Gestion de compra
+    * [x] <strong>Generar orden mercado</strong>
+    * [x] <strong>Gestion de compra</strong>
     * [ ] Preview tiempo y dinero
 * Tablero de tiempo
-    * [x] Generar tablero
+    * [x] <strong>Generar tablero</strong>
 * Colocar piezas en tablero
-    * [x] Generar tablero
+    * [x] <strong>Generar tablero</strong>
     * [ ] Colocacion de pieza comprada en tablero de jugador
     * [ ] Ayuda visual (incluido comprobacion de si se puede colocar o no)
-    * [x] Calcular bonus 7x7
+    * [x] <strong>Calcular bonus 7x7</strong>
     * [ ] Descarte de piezas
 * Piezas
-    * [x] Modelado a través de vertices (1d => 2d)
-    * [x] Rotar y Flip
+    * [x] <strong>Modelado a través de vertices (1d => 2d)</strong>
+    * [x] <strong>Rotar y Flip</strong>
 * Game Loop
-    * [x] Comenzar juego
-    * [x] Finalizar juego
+    * [x] <strong>Comenzar juego</strong>
+    * [x] <strong>Finalizar juego</strong>
 * UI - Pantalla config
     * [ ] Modo de juego
     * [ ] Opciones

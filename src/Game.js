@@ -98,7 +98,7 @@ class Game extends Component {
                     break;
                     case "patch":
                         checkpoint.pickedup = true;
-                        patchIntent = Object.assign({ "id": `bonus${checkpoint.id}` }, BonusTile);
+                        patchIntent = Object.assign({}, BonusTile, { "id": `bonus${checkpoint.id}` });
                     break;
                     default:
                         // no hay default
@@ -191,7 +191,7 @@ class Game extends Component {
                 ? <EndGame players={this.state.players} size={this.state.cfg.playerboard.size} onRestart={this.handleRestart} />
                 : <div className="game">
                     <TimeBoard players={this.state.players} checkpoints={this.state.checkpoints} size={this.state.cfg.timeboard.size} />
-                    <div className="players">
+                    <div className={`players ${this.state.players.find(p => p.playing).name}`}>
                     { this.state.players.map((player, i) =>
                         <Player key={player.name} size={this.state.cfg.playerboard.size} player={player} patch={this.state.patchIntent} onPlacePatch={this.handlePlacePatch} />) }
                     </div>

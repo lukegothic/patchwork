@@ -11,7 +11,6 @@ const EndGame = ({ players, size, onRestart }) => {
         winner = players.find(p => p.finishPosition === 1);
     }
     winner = winner[0];
-    console.log(players);
     return <div className="end"><h1>FIN</h1>
         <h2>{winner.name} is Winner</h2>
         { players.map(p => <div key={`end${p.name}`} className="playersummary"><span className="playername">Player: {p.name}</span> <span className="score">Score: {p.score}</span> <span className="finishposition">Finish position: {p.finishPosition}</span></div>) }

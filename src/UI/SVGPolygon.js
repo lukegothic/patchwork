@@ -1,6 +1,6 @@
 import React from 'react';
 import { BlockSize } from '../Const';
-const SVGPatch = ({ vertex }) => {
+const SVGPolygon = ({ vertex }) => {
     // calculate clipPath --> parejas de (x,y)
     let clipPath = [];
     // 1. transformar vertices 1d a 2d (cuadrados)
@@ -25,4 +25,4 @@ const SVGPatch = ({ vertex }) => {
     }
     return <polygon className="patch" points={clipPath.map(pos => `${pos[0]*BlockSize},${pos[1]*BlockSize}`).join(" ")} />
 }
-export default SVGPatch;
+export default SVGPolygon;

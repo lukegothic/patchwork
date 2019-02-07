@@ -5,7 +5,7 @@ const Market = ({ patches, playerAdvance, onBuyPatch, playerMoney }) => {
     // patches: ultimo = posicion actual; 0, 1 y 2 opciones de compra
     return <div className="market">
                 <div className="patchcount">{patches.length}</div>
-                <div className="patchboard">{patches.map((p, i) => <Patch key={`market${p.id}`} playerMoney={playerMoney} patch={p} onClick={ ([0,1,2].indexOf(i) !== -1) ? () => onBuyPatch(p) : undefined }><PriceTag cost={p.cost} /></Patch>)}</div>
+                <div className="patchboard">{patches.map((p, i) => <div key={`market${p.id}`} className={`marketpatch ${i < 3 ? "onsale" : "next"} ${playerMoney >= p.cost.money ? "" : "not"}buyable` } onClick={ (i < 3) ? () => onBuyPatch(p) : undefined }><Patch patch={p}/><PriceTag cost={p.cost} /></div>)}</div>
                 <button onClick={() => onBuyPatch(null)}>DESCANSAR +{ playerAdvance }<i className="fa fa-dot-circle"></i> { playerAdvance }<i className="fa fa-hourglass-half"></i></button>
             </div>
 }
