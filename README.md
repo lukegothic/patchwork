@@ -26,7 +26,7 @@
     * [x] Piezas
     * [x] Tablero de tiempo
 * Modos de juego
-    * [ ] Hot-seat
+    * [x] Hot-seat
     * [ ] vs IA
     * [ ] Multiplayer
 * Mercado
@@ -37,7 +37,7 @@
     * [x] Generar tablero
 * Colocar piezas en tablero
     * [x] Generar tablero
-    * [ ] Colocacion de pieza comprada en tablero de jugador (corregir bug cuando se quiere colocar una pieza en un sitio ocupado y no hay ayuda visual)
+    * [ ] Colocacion de pieza comprada en tablero de jugador
     * [ ] Ayuda visual (incluido comprobacion de si se puede colocar o no)
     * [x] Calcular bonus 7x7
     * [ ] Descarte de piezas

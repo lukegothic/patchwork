@@ -148,11 +148,12 @@ code {
   left: 0;
 }
 .playerboard .patchPlacer .tile {
-  background-color: green;
+  /*background-color: green;
   opacity: 0.5;
-  position: absolute;
+  */
   cursor: pointer;
+  position: absolute;
 }
-.playerboard .patchPlacer .tile:hover {
+.playerboard .patchPlacer .tile.dragover {
   background-color: greenyellow;
 }

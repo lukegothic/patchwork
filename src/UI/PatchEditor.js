@@ -19,15 +19,20 @@ const applyTransform = (patch, transformFn) => {
     patch.vertex = MoveToOrigin(patch.vertex.map(transformFn));
     return patch;
 }
+const onDragStart = (e) => {
+    e.dataTransfer.setData('text/plain', 'Drag Me Button');
+}
 const PatchEditor = ({ patch, onEdit, onCancel }) => {
     return <div className="patchEditor">
-        <Patch patch={patch}></Patch>
+        <div className="patchIntent" draggable="true" onDragStart={onDragStart}>
+            <Patch patch={patch}></Patch>
+        </div>
         {!/^bonus.*/.test(patch.id) && 
         <div className="editcontrols">
-            <button onClick={() => onEdit(applyTransform(patch, FlipX))}>FlipX</button>
-            <button onClick={() => onEdit(applyTransform(patch, RotateCCW))}>CCW</button>
-            <button onClick={() => onEdit(applyTransform(patch, RotateCW))}>CW</button>
-            <button onClick={() => onEdit(applyTransform(patch, FlipY))}>FlipY</button>
+            <button onClick={() => onEdit(applyTransform(patch, FlipX))}><i className="fa fa-arrows-alt-v" /></button>
+            <button onClick={() => onEdit(applyTransform(patch, RotateCCW))}><i className="fa fa-undo" /></button>
+            <button onClick={() => onEdit(applyTransform(patch, RotateCW))}><i className="fa fa-redo" /></button>
+            <button onClick={() => onEdit(applyTransform(patch, FlipY))}><i className="fa fa-arrows-alt-h" /></button>
             <button onClick={onCancel}>Cancel</button>
         </div>
         }        
