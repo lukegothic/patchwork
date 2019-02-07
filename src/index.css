@@ -140,6 +140,9 @@ code {
   position:relative;
   display: inline-block;
 }
+.playerboard svg {
+  pointer-events: none;
+}
 .patchPlacer {
   position: absolute;
   width: 100%;
