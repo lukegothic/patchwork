@@ -72,7 +72,7 @@ class Game extends Component {
     }
     isLegalPlacement = (player, patch, at) => {
         const patchVertex = patch.vertex.map(v => [v[0] + at[0], v[1] + at[1]]);
-        return patchVertex.every(v => v[0] >= 0 && v[0] < this.state.cfg.playerboard.size.w && v[1] >= 0 && v[1] < this.state.cfg.playerboard.size.h && !BoardHelper.getUsedTiles(player).find(tile => tile[0] === v[0] && tile[1] === v[1]));
+        return patchVertex.every(v => v[0] >= 0 && v[0] < this.state.cfg.playerboard.size.w && v[1] >= 0 && v[1] < this.state.cfg.playerboard.size.h && !BoardHelper.getPlayerTiles(player).some(tile => BoardHelper.IsSameVertex(tile , v)));
     }
     isEndGame = () => {
         return this.state.players.reduce((acc, curr) => acc + curr.position, 0) === (this.state.cfg.timeboard.size - 1) * this.state.players.length;
@@ -159,6 +159,11 @@ class Game extends Component {
                 playersByStatus.active.position_before = playersByStatus.active.position;
                 playersByStatus.active.position = clamp(playersByStatus.active.position + state.patchIntent.cost.time, state.cfg.timeboard.size - 1);
                 playersByStatus.active.money -= state.patchIntent.cost.money;
+                // Asignar parche bonus 7x7
+                if (!players.find(p => p.first7x7)) {
+                    const pHas7x7 = BoardHelper.hasCoveredZone(playersByStatus.active, state.cfg.playerboard.size, { "w": 7, "h": 7 });
+                    playersByStatus.active.first7x7 = pHas7x7;
+                }
                 // Si no se encuentra el parche, es que es un bonus
                 const patchToRemove = state.patchList.findIndex(p => p.id === state.patchIntent.id);
                 return {
