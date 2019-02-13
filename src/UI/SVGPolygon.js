@@ -23,6 +23,7 @@ const SVGPolygon = ({ vertex, fill }) => {
         clipPath.push(currentPath[0]);
         currentPath = nextPath(); 
     }
+    // TODO: duplicar output para simular borde
     return <polygon className="SVGPolygon" fill={`url(#p${fill})`} points={clipPath.map(pos => `${pos[0]*BlockSize},${pos[1]*BlockSize}`).join(" ")} />
 }
 export default SVGPolygon;
