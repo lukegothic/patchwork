@@ -62,10 +62,22 @@ code {
   overflow-y: scroll;
   text-align: center;
 }
+.SVGPolygon {
+  stroke: #21409a;
+  stroke-linecap: butt;
+  stroke-dasharray: 2,3,1;
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+.marketpatch .SVGPolygon, .patchEditor .SVGPolygon{
+  stroke-width: 8;
+}
+.SVGPattern_bg {
+  fill: #21409a;
+}
 .marketpatch {
   display: block;
   margin: 4px 0;
-  fill:url(#pattern);
 }
 .marketpatch.onsale.buyable {
   cursor: pointer;
@@ -137,23 +149,16 @@ code {
 }
 .timecheckpoint {
   position: absolute;
-  display:inline-block;
-  left: -50%;
-  top: 5px;
-  height: 30px;
-  width: 30px;
-  line-height: 30px;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
 }
 .timecheckpoint.patch {
-  transform: rotate(20deg);
-  background-color: brown;
+  background-color:rgba(78, 55, 12, 0.582);
 }
 .timecheckpoint.money {
-  color: #fff;
-  font-weight: bold;
-  background-color: blue;
-  border-radius: 50%;
-  text-align: center;
+  background-color:rgba(90, 177, 248, 0.733)
 }
 .playerboard {
   background: url(https://via.placeholder.com/400);
