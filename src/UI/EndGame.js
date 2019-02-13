@@ -3,7 +3,7 @@ import * as BoardHelper from '../BoardHelper';
 import { MaxReducer } from '../Reducers';
 const EndGame = ({ players, size, onRestart }) => {
     players.forEach(p => {
-        p.score = p.money + (p.first7x7 ? 7 : 0) - (BoardHelper.getFreeTiles(p, size).length * 2);
+        p.score = p.money + p.bonuses.reduce((acc, b) => acc + b.points, 0) - (BoardHelper.getFreeTiles(p, size).length * 2);
     });
     const maxScore = players.map(p => p.score).reduce(MaxReducer, -999);
     let winner = players.filter(p => p.score === maxScore);

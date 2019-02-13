@@ -19,6 +19,8 @@ class Game extends Component {
             patchList: this.generatePatchList(),        // available patches
             patchIntent: null,                          // patch to be placed
             checkpoints: TimeBoardBaseLayout.checkpoints.map((cp, i) => Object.assign({ "id": `chk${i}` }, cp)),    // timeboard checkpoints/bonuses
+            // TODO: que venga de configuracion
+            bonuses: this.generateBonuses(),
             // Configuration
             // TODO: Que venga de una pantalla de configuracion
             cfg: {
@@ -45,8 +47,8 @@ class Game extends Component {
             "position": 0,
             "position_before": null,
             "money": 5,
-            "first7x7": false,
             "finishPosition": null,
+            "bonuses": [],
             "patches": [],
             "playing": name === startingPlayer
         }));
@@ -56,6 +58,9 @@ class Game extends Component {
         let otherPatches = Patches.filter(p => !p.initial);
         otherPatches = shuffle(otherPatches);
         return otherPatches.concat(initialPatch);
+    }
+    generateBonuses = () => {
+        return [{ id: "7_7_7", size: { "w": 7, "h": 7 }, points: 7 }];
     }
     // UTILS
     getPlayers = (players) => {
@@ -159,15 +164,18 @@ class Game extends Component {
                 playersByStatus.active.position_before = playersByStatus.active.position;
                 playersByStatus.active.position = clamp(playersByStatus.active.position + state.patchIntent.cost.time, state.cfg.timeboard.size - 1);
                 playersByStatus.active.money -= state.patchIntent.cost.money;
-                // Asignar parche bonus 7x7
-                if (!players.find(p => p.first7x7)) {
-                    const pHas7x7 = BoardHelper.hasCoveredZone(playersByStatus.active, state.cfg.playerboard.size, { "w": 7, "h": 7 });
-                    playersByStatus.active.first7x7 = pHas7x7;
-                }
+                // Comprobar si se ha obtenido uno de los bonus disponibles
+                let bonuses = state.bonuses.slice();
+                state.bonuses.forEach(b => {
+                    if (BoardHelper.hasCoveredZone(playersByStatus.active, state.cfg.playerboard.size, b.size)) {
+                        playersByStatus.active.bonuses.push(bonuses.splice(bonuses.findIndex(bx => bx.id === b.id), 1)[0]);
+                    }
+                });
                 // Si no se encuentra el parche, es que es un bonus
                 const patchToRemove = state.patchList.findIndex(p => p.id === state.patchIntent.id);
                 return {
                     players,
+                    bonuses,
                     patchIntent: null,
                     patchList: (patchToRemove !== -1) ? state.patchList.slice(patchToRemove + 1).concat(state.patchList.slice(0, patchToRemove)): state.patchList
                 };
@@ -181,6 +189,7 @@ class Game extends Component {
         this.setState({
             players: this.generatePlayers(),
             patchList: this.generatePatchList(),
+            bonuses: this.generateBonuses(),
             patchIntent: null,
             checkpoints: TimeBoardBaseLayout.checkpoints.map((cp, i) => Object.assign({ "id": `chk${i}` }, cp))
         });
