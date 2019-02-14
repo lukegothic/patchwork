@@ -1,3 +1,3 @@
 import React from 'react';
-const PlayerTime = ({ player }) => <div className={`playermarker ${player}`}></div>
+const PlayerTime = ({ player, isFuture }) => <div className={`playermarker ${player}${isFuture ? " future" : ""}`}></div>
 export default PlayerTime;

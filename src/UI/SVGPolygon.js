@@ -1,7 +1,6 @@
 import React from 'react';
 import { BlockSize } from '../Const';
 const SVGPolygon = ({ vertex, fill }) => {
-    console.log(fill);
     // calculate clipPath --> parejas de (x,y)
     let clipPath = [];
     // 1. transformar vertices 1d a 2d (cuadrados)

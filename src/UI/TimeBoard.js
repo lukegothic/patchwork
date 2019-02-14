@@ -3,15 +3,17 @@ import { Range } from '../utils';
 import TimeBoardSquare from './TimeBoardSquare';
 import TimeBoardCheckpoint from './TimeBoardCheckpoint';
 import PlayerTime from './PlayerTime';
-const TimeBoard = ({ players, checkpoints, size }) => {
+const TimeBoard = ({ players, checkpoints, size, patchIntent }) => {
     // TODO: remake TimeBoard mas bonica y con barras para los players
+    const activePlayer = players.find(p => p.playing);
     return (
         <div className="timeboard">
         {Range(0, size - 1).map(pos => {
             const checkpoint = checkpoints.find(cp => cp.position === pos && cp.pickedup !== true);
             return <TimeBoardSquare key={`ts${pos}`}>
                 {checkpoint && <TimeBoardCheckpoint key={`tsc${pos}`} checkpoint={checkpoint} />}
-                { players.map(player => player.position === pos && <PlayerTime key={`pt${player.name}`} player={player.name} />) }
+                { players.map(player => player.position === pos && <PlayerTime key={`pt${player.name}`} player={player.name} isFuture={false} />) }
+                { patchIntent && (activePlayer.position + patchIntent.cost.time) === pos && <PlayerTime key={`ptf${activePlayer.name}`} player={activePlayer.name} isFuture={true} /> }
             </TimeBoardSquare>
         })}
         </div>

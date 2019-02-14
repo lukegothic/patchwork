@@ -149,6 +149,21 @@ code {
   top:11px;
   left:11px;
 }
+.timesquare .playermarker.future {
+  -webkit-animation: op 1s infinite linear;
+  animation: op 1s infinite linear;
+}
+@keyframes op {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
 .timecheckpoint {
   position: absolute;
   top: 0;

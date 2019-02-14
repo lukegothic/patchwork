@@ -209,9 +209,9 @@ class Game extends Component {
             this.isEndGame()
                 ? <EndGame players={this.state.players} size={this.cfg.playerboard.size} onRestart={this.handleRestart} />
                 : <div className="game">
-                    <TimeBoard players={this.state.players} checkpoints={this.state.checkpoints} size={this.cfg.timeboard.size} />
+                    <TimeBoard players={this.state.players} checkpoints={this.state.checkpoints} size={this.cfg.timeboard.size} patchIntent={this.state.patchIntent} />
                     <div className={`players ${this.state.players.find(p => p.playing).name}`}>
-                    { this.state.players.map((player, i) =>
+                    { this.state.players.map((player) =>
                         <Player key={player.name} size={this.cfg.playerboard.size} player={player} patch={this.state.patchDragging && this.state.patchIntent} onPlacePatch={this.handlePlacePatch} />) }
                     </div>
                     { this.state.patchIntent !== null

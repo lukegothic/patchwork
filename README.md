@@ -32,7 +32,7 @@
 * Mercado
     * [x] <strong>Generar orden mercado</strong>
     * [x] <strong>Gestion de compra</strong>
-    * [ ] Preview tiempo y dinero tras compra
+    * [x] <strong>Preview tiempo tras compra</strong>
 * Tablero de tiempo
     * [x] <strong>Generar tablero</strong>
 * Tablero de jugador
