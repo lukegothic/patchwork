@@ -135,23 +135,7 @@ export const PatchPatterns = () => {
         <rect className="SVGPattern_bg" width="52" height="52" />
         <path fill="#f8a51b" d="M 0 17.83 V 0 h 17.83 a 3 3 0 0 1 -5.66 2 H 5.9 A 5 5 0 0 1 2 5.9 v 6.27 a 3 3 0 0 1 -2 5.66 Z m 0 18.34 a 3 3 0 0 1 2 5.66 v 6.27 A 5 5 0 0 1 5.9 52 h 6.27 a 3 3 0 0 1 5.66 0 H 0 V 36.17 Z M 36.17 52 a 3 3 0 0 1 5.66 0 h 6.27 a 5 5 0 0 1 3.9 -3.9 v -6.27 a 3 3 0 0 1 0 -5.66 V 52 H 36.17 Z M 0 31.93 v -9.78 a 5 5 0 0 1 3.8 0.72 l 4.43 -4.43 a 3 3 0 1 1 1.42 1.41 L 5.2 24.28 a 5 5 0 0 1 0 5.52 l 4.44 4.43 a 3 3 0 1 1 -1.42 1.42 L 3.8 31.2 a 5 5 0 0 1 -3.8 0.72 Z m 52 -14.1 a 3 3 0 0 1 0 -5.66 V 5.9 A 5 5 0 0 1 48.1 2 h -6.27 a 3 3 0 0 1 -5.66 -2 H 52 v 17.83 Z m 0 14.1 a 4.97 4.97 0 0 1 -1.72 -0.72 l -4.43 4.44 a 3 3 0 1 1 -1.41 -1.42 l 4.43 -4.43 a 5 5 0 0 1 0 -5.52 l -4.43 -4.43 a 3 3 0 1 1 1.41 -1.41 l 4.43 4.43 c 0.53 -0.35 1.12 -0.6 1.72 -0.72 v 9.78 Z M 22.15 0 h 9.78 a 5 5 0 0 1 -0.72 3.8 l 4.44 4.43 a 3 3 0 1 1 -1.42 1.42 L 29.8 5.2 a 5 5 0 0 1 -5.52 0 l -4.43 4.44 a 3 3 0 1 1 -1.41 -1.42 l 4.43 -4.43 a 5 5 0 0 1 -0.72 -3.8 Z m 0 52 c 0.13 -0.6 0.37 -1.19 0.72 -1.72 l -4.43 -4.43 a 3 3 0 1 1 1.41 -1.41 l 4.43 4.43 a 5 5 0 0 1 5.52 0 l 4.43 -4.43 a 3 3 0 1 1 1.42 1.41 l -4.44 4.43 c 0.36 0.53 0.6 1.12 0.72 1.72 h -9.78 Z m 9.75 -24 a 5 5 0 0 1 -3.9 3.9 v 6.27 a 3 3 0 1 1 -2 0 V 31.9 a 5 5 0 0 1 -3.9 -3.9 h -6.27 a 3 3 0 1 1 0 -2 h 6.27 a 5 5 0 0 1 3.9 -3.9 v -6.27 a 3 3 0 1 1 2 0 v 6.27 a 5 5 0 0 1 3.9 3.9 h 6.27 a 3 3 0 1 1 0 2 H 31.9 Z" />
       </pattern>
-      <pattern id="pbonus1" width="4" height="4" patternUnits="userSpaceOnUse" >
-        <rect className="SVGPattern_bg" width="3" height="3" />
-        <path fill="#f8a51b" d="M0 0 L1 0 L1 2 L3 3 L2 1 L0 1 Z" />
-      </pattern>
-      <pattern id="pbonus2" width="4" height="4" patternUnits="userSpaceOnUse" >
-        <rect className="SVGPattern_bg" width="3" height="3" />
-        <path fill="#f8a51b" d="M0 0 L1 0 L1 2 L3 3 L2 1 L0 1 Z" />
-      </pattern>
-      <pattern id="pbonus3" width="4" height="4" patternUnits="userSpaceOnUse" >
-        <rect className="SVGPattern_bg" width="3" height="3" />
-        <path fill="#f8a51b" d="M0 0 L1 0 L1 2 L3 3 L2 1 L0 1 Z" />
-      </pattern>
-      <pattern id="pbonus4" width="4" height="4" patternUnits="userSpaceOnUse" >
-        <rect className="SVGPattern_bg" width="3" height="3" />
-        <path fill="#f8a51b" d="M0 0 L1 0 L1 2 L3 3 L2 1 L0 1 Z" />
-      </pattern>
-      <pattern id="pbonus5" width="4" height="4" patternUnits="userSpaceOnUse" >
+      <pattern id="pbonus" width="4" height="4" patternUnits="userSpaceOnUse" >
         <rect className="SVGPattern_bg" width="3" height="3" />
         <path fill="#f8a51b" d="M0 0 L1 0 L1 2 L3 3 L2 1 L0 1 Z" />
       </pattern>

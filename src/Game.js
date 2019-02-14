@@ -75,6 +75,7 @@ class Game extends Component {
         const mod = players.find(p => p.finishPosition !== null) ? 0 : LeapLength; 
         return distance + mod;
     }
+    getListWithoutPatch = (patch, patchList) => patchList.filter(p => p.id !== patch.id);
     isLegalPlacement = (player, patch, at) => {
         const patchVertex = patch.vertex.map(v => [v[0] + at[0], v[1] + at[1]]);
         return patchVertex.every(v => v[0] >= 0 && v[0] < this.cfg.playerboard.size.w && v[1] >= 0 && v[1] < this.cfg.playerboard.size.h && !BoardHelper.getPlayerTiles(player).some(tile => BoardHelper.IsSameVertex(tile , v)));
@@ -155,30 +156,31 @@ class Game extends Component {
             this.handlePass();
         }
     }
-    handleReturnPatch = () => this.setState({ patchIntent: null });
+    handleReturnPatch = () => this.setState(() => ({ patchIntent: null }));
     handlePlacePatch = (at) => {
         this.setState(state => {
             let players = state.players.slice();
             let playersByStatus = this.getPlayers(players);
-            if (this.isLegalPlacement(playersByStatus.active, state.patchIntent, at)) {
-                playersByStatus.active.patches.push(Object.assign(this.state.patchIntent, { "at": at }));
+            if (at === null || this.isLegalPlacement(playersByStatus.active, state.patchIntent, at)) {
+                let bonuses = state.bonuses.slice();
+                // at es null cuando se ha pulsado en descartar la pieza, por lo que no se anade a la coleccion del jugador
+                if (at !== null) {
+                    playersByStatus.active.patches.push(Object.assign(this.state.patchIntent, { "at": at }));
+                    // Comprobar si se ha obtenido uno de los bonus disponibles
+                    state.bonuses.forEach(b => {
+                        if (BoardHelper.hasCoveredZone(playersByStatus.active, this.cfg.playerboard.size, b.size)) {
+                            playersByStatus.active.bonuses.push(bonuses.splice(bonuses.findIndex(bx => bx.id === b.id), 1)[0]);
+                        }
+                    });
+                }
                 playersByStatus.active.position_before = playersByStatus.active.position;
                 playersByStatus.active.position = clamp(playersByStatus.active.position + state.patchIntent.cost.time, this.cfg.timeboard.size - 1);
-                playersByStatus.active.money -= state.patchIntent.cost.money;
-                // Comprobar si se ha obtenido uno de los bonus disponibles
-                let bonuses = state.bonuses.slice();
-                state.bonuses.forEach(b => {
-                    if (BoardHelper.hasCoveredZone(playersByStatus.active, this.cfg.playerboard.size, b.size)) {
-                        playersByStatus.active.bonuses.push(bonuses.splice(bonuses.findIndex(bx => bx.id === b.id), 1)[0]);
-                    }
-                });
-                // Si no se encuentra el parche, es que es un bonus
-                const patchToRemove = state.patchList.findIndex(p => p.id === state.patchIntent.id);
+                playersByStatus.active.money -= state.patchIntent.cost.money;                
                 return {
                     players,
                     bonuses,
                     patchIntent: null,
-                    patchList: (patchToRemove !== -1) ? state.patchList.slice(patchToRemove + 1).concat(state.patchList.slice(0, patchToRemove)): state.patchList
+                    patchList: this.getListWithoutPatch(state.patchIntent, state.patchList)
                 };
             } else {
                 // TODO: toast
@@ -213,7 +215,7 @@ class Game extends Component {
                         <Player key={player.name} size={this.cfg.playerboard.size} player={player} patch={this.state.patchDragging && this.state.patchIntent} onPlacePatch={this.handlePlacePatch} />) }
                     </div>
                     { this.state.patchIntent !== null
-                        ? <PatchEditor patch={this.state.patchIntent} onEdit={this.handleBuyPatchIntent} onCancel={this.handleReturnPatch} onDragStart={this.handleDragStart} onDragEnd={this.handleDragEnd} />
+                        ? <PatchEditor patch={this.state.patchIntent} onEdit={this.handleBuyPatchIntent} onCancel={this.handleReturnPatch} onDragStart={this.handleDragStart} onDragEnd={this.handleDragEnd} onDiscard={() => this.handlePlacePatch(null)} />
                         : <Market playerAdvance={this.getPlayerAdvanceOnPass()} playerMoney={this.state.players.find(p => p.playing).money} patches={this.state.patchList} onBuyPatch={this.handleBuyPatchIntent} />
                     }
                     </div>
