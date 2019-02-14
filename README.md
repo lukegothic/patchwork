@@ -37,10 +37,10 @@
     * [x] <strong>Generar tablero</strong>
 * Colocar piezas en tablero
     * [x] <strong>Generar tablero</strong>
-    * [ ] Colocacion de pieza comprada en tablero de jugador
-    * [ ] Ayuda visual (incluido comprobacion de si se puede colocar o no)
+    * [x] <strong>Colocacion de pieza comprada en tablero de jugador</strong>
+    * [x] <strong>Ayuda visual (incluido comprobacion de si se puede colocar o no)</strong>
     * [x] <strong>Calcular bonus 7x7</strong>
-    * [ ] Descarte de piezas
+    * [x] <strong>Descarte de piezas</strong>
 * Piezas
     * [x] <strong>Modelado a través de vertices (1d => 2d)</strong>
     * [x] <strong>Rotar y Flip</strong>

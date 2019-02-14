@@ -68,10 +68,10 @@ code {
   stroke-dasharray: 2,3,1;
   stroke-width: 2;
   stroke-linejoin: round;
-  /*paint-order: stroke;*/
+  paint-order: stroke;
 }
 .marketpatch .SVGPolygon, .patchEditor .SVGPolygon{
-  stroke-width: 8;
+  stroke-width: 10;
 }
 .SVGPattern_bg {
   fill: #21409a;

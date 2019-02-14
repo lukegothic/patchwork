@@ -4,11 +4,11 @@ import React from 'react';
 import { BlockSize } from '../Const';
 const PlayerBoard = ({ size, patches, children }) => {
     const vwSize = {
-        h: size.h * BlockSize,
-        w: size.w * BlockSize
+        height: size.h * BlockSize,
+        width: size.w * BlockSize
     };
-    return <div className="playerboard" style={{ "height": vwSize.h, "width": vwSize.w }}>
-                <svg height={vwSize.h} width={vwSize.w}>
+    return <div className="playerboard" style={vwSize}>
+                <svg {...vwSize}>
                 {patches.map(patch => <SVGPolygon fill={patch.id} key={`pp${patch.id}`} vertex={BoardHelper.MovePatch(patch).vertex} />)}
                 </svg>
                 {children}
