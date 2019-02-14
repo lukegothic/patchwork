@@ -9,7 +9,7 @@ const PlayerBoard = ({ size, patches, children }) => {
     };
     return <div className="playerboard" style={vwSize}>
                 <svg {...vwSize}>
-                {patches.map(patch => <SVGPolygon fill={patch.id} key={`pp${patch.id}`} vertex={BoardHelper.MovePatch(patch).vertex} />)}
+                {patches.map(patch => <SVGPolygon fill={patch.fill} key={`pp${patch.id}`} vertex={BoardHelper.MovePatch(patch).vertex} />)}
                 </svg>
                 {children}
             </div>

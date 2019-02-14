@@ -1,6 +1,7 @@
 import React from 'react';
 import { BlockSize } from '../Const';
 const SVGPolygon = ({ vertex, fill }) => {
+    console.log(fill);
     // calculate clipPath --> parejas de (x,y)
     let clipPath = [];
     // 1. transformar vertices 1d a 2d (cuadrados)
@@ -24,6 +25,6 @@ const SVGPolygon = ({ vertex, fill }) => {
         currentPath = nextPath(); 
     }
     // TODO: duplicar output para simular borde
-    return <polygon className="SVGPolygon" fill={`url(#p${fill})`} points={clipPath.map(pos => `${pos[0]*BlockSize},${pos[1]*BlockSize}`).join(" ")} />
+    return <polygon className="SVGPolygon" fill={`url(#${fill})`} points={clipPath.map(pos => `${pos[0]*BlockSize},${pos[1]*BlockSize}`).join(" ")} />
 }
 export default SVGPolygon;

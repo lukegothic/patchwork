@@ -32,10 +32,10 @@
 * Mercado
     * [x] <strong>Generar orden mercado</strong>
     * [x] <strong>Gestion de compra</strong>
-    * [ ] Preview tiempo y dinero
+    * [ ] Preview tiempo y dinero tras compra
 * Tablero de tiempo
     * [x] <strong>Generar tablero</strong>
-* Colocar piezas en tablero
+* Tablero de jugador
     * [x] <strong>Generar tablero</strong>
     * [x] <strong>Colocacion de pieza comprada en tablero de jugador</strong>
     * [x] <strong>Ayuda visual (incluido comprobacion de si se puede colocar o no)</strong>
@@ -44,9 +44,14 @@
 * Piezas
     * [x] <strong>Modelado a través de vertices (1d => 2d)</strong>
     * [x] <strong>Rotar y Flip</strong>
+    * [ ] Diseño de patrones diferentes para las piezas
 * Game Loop
     * [x] <strong>Comenzar juego</strong>
     * [x] <strong>Finalizar juego</strong>
+* Replayability
+    * [ ] Tablero de tiempo random
+    * [ ] Tablero de jugador configurable
+    * [ ] Piezas random
 * UI - Pantalla config
     * [ ] Modo de juego
     * [ ] Opciones
