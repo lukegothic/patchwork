@@ -26,7 +26,7 @@
     * [x] <strong>Piezas</strong>
     * [x] <strong>Tablero de tiempo</strong>
 * Modos de juego
-    * [x] <strong>Hot-seat</strong>
+    * [x] <strong>Local</strong>
     * [ ] vs IA
     * [ ] Multiplayer
 * Mercado
@@ -48,19 +48,20 @@
 * Game Loop
     * [x] <strong>Comenzar juego</strong>
     * [x] <strong>Finalizar juego</strong>
-* Replayability
-    * [ ] Tablero de tiempo random
-    * [ ] Tablero de jugador configurable
-    * [ ] Piezas random
-* UI - Pantalla config
+* UI - Configuracion
     * [ ] Modo de juego
     * [ ] Opciones
-* UI - Pantalla juego
+* UI - Juego
     * [ ] Info de jugador
     * [ ] Tablero de jugador + alternar entre un jugador y otro
     * [ ] Mercado de piezas
     * [ ] Tablero de tiempo
+    * [ ] Pantalla fin
 * Juice it up
     * [ ] Juice it
     * [ ] More juice
     * [ ] Best juice
+* Replayability
+    * [ ] Tablero de tiempo random
+    * [ ] Tablero de jugador configurable
+    * [ ] Piezas random
