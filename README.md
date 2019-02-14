@@ -44,7 +44,7 @@
 * Piezas
     * [x] <strong>Modelado a través de vertices (1d => 2d)</strong>
     * [x] <strong>Rotar y Flip</strong>
-    * [ ] Diseño de patrones diferentes para las piezas
+    * [x] <strong>Diseño de patrones diferentes para las piezas</strong>
 * Game Loop
     * [x] <strong>Comenzar juego</strong>
     * [x] <strong>Finalizar juego</strong>
