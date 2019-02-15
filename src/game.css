@@ -1,0 +1,45 @@
+/* CSS escenas */
+.game {}
+
+/* Players */
+.players {
+    perspective: 600px;
+    position: relative;
+    float: left;
+    width: 400px;
+    height: 400px;
+    display: block;
+}
+
+.players .player {
+    float: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.players .player.p0 {
+    z-index: 900;
+    transform: rotateX(0) rotateY(0);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    transition: all .4s ease-in-out;
+}
+
+.players.p1 .player.p0 {
+    z-index: 900;
+    transform: rotateY(179deg);
+}
+
+.players .player.p1 {
+    z-index: 800;
+    transform: rotateY(-179deg);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    transition: all .4s ease-in-out;
+}
+
+.players.p1 .player.p1 {
+    z-index: 1000;
+    transform: rotateX(0) rotateY(0);
+}

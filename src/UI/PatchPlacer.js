@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PatchPlacerTile from './PatchPlacerTile';
-import * as BoardHelper from '../BoardHelper';
-import * as PatchHelper from '../PatchHelper';
+import * as BoardHelper from '../utils/BoardHelper';
+import * as PatchHelper from '../utils/PatchHelper';
 import { clamp } from '../utils';
+import './patchplacer.css';
 class PatchPlacer extends Component {
     constructor(props) {
         super(props);

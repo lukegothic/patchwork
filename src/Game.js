@@ -1,32 +1,24 @@
 import React, { Component } from 'react';
-import Market from './UI/Market';
+import Timeline from './UI/Timeline';
 import Player from './UI/Player';
-import TimeBoard from './UI/TimeBoard';
-import PatchEditor from './UI/PatchEditor';
+import Market from './UI/Market';
+import Editor from './UI/Editor';
 import EndGame from './UI/EndGame';
-import * as BoardHelper from './BoardHelper';
-import { Patches, TimeBoardBaseLayout } from './Data';
-import { BonusTile, LeapLength } from './Const';
+
+import { BonusTile, LeapLength, BasePlayers, BaseTimeline, BaseBonuses, BasePatches } from './const';
+import * as BoardHelper from './utils/BoardHelper';
 import { shuffle, clamp } from './utils';
+
+import './game.css';
 
 class Game extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            // Game State
-            players: this.generatePlayers(),            // players 
-            patchList: this.generatePatchList(),        // available patches
-            patchIntent: null,                          // patch to be placed
-            patchDragging: false,
-            // TODO: Checkpoints configurables
-            checkpoints: TimeBoardBaseLayout.checkpoints.map((cp, i) => Object.assign({ "id": `chk${i}` }, cp)),    // timeboard checkpoints/bonuses
-            // TODO: Bonuses configurables
-            bonuses: this.generateBonuses(),
-        }
+        this.state = this.getNewGame();
         // TODO: Configuracion
         this.cfg = {
-            timeboard:{
-                "size": TimeBoardBaseLayout.size    // longitud de la partida, en casillas
+            timeline:{
+                "size": BaseTimeline.size    // longitud de la partida, en casillas
             },
             playerboard: {                          // ancho y alto del tablero del jugador
                 "size": {
@@ -37,12 +29,10 @@ class Game extends Component {
         }
     }
     // SETUP
-    generatePlayers = () => {
-        // TODO: names por config
-        const playerNames = ["p1", "p2"];
-        const startingPlayer = shuffle(playerNames)[0];
-        return playerNames.map((name, i) => ({ 
-            "id": i,
+    generatePlayers = (players) => {
+        const startingPlayer = shuffle(players)[0];
+        return players.map((name, i) => ({ 
+            "id": `p${i}`,
             "name": name,
             "position": 0,
             "position_before": null,
@@ -53,15 +43,26 @@ class Game extends Component {
             "playing": name === startingPlayer
         }));
     }
-    generatePatchList = () => {
-        const initialPatch = Patches.find(p => p.initial);
-        let otherPatches = Patches.filter(p => !p.initial);
+    generatePatchList = (patches) => {
+        const initialPatch = patches.find(p => p.initial);
+        let otherPatches = patches.filter(p => !p.initial);
         otherPatches = shuffle(otherPatches);
         return otherPatches.concat(initialPatch);
     }
-    generateBonuses = () => {
-        return [{ id: "7_7_7", size: { "w": 7, "h": 7 }, points: 7 }];
+    generateBonuses = (bonuses) => {
+        return bonuses.slice();
     }
+    generateCheckpoints = (timeline) => {
+        return timeline.checkpoints.map((cp, i) => Object.assign({ "id": `chk${i}` }, cp))
+    }
+getNewGame = () => ({                                           // TODO: Por Config else Base
+        players: this.generatePlayers(BasePlayers),             // players 
+        patchList: this.generatePatchList(BasePatches),         // market patches
+        checkpoints: this.generateCheckpoints(BaseTimeline),    // timeline checkpoints
+        bonuses: this.generateBonuses(BaseBonuses),             // timeline bonuses
+        patchIntent: null,                                      // patch to be placed
+        patchDragging: false                                    // is player placing a patch
+    })
     // UTILS
     getPlayers = (players) => {
         return {
@@ -81,7 +82,7 @@ class Game extends Component {
         return patchVertex.every(v => v[0] >= 0 && v[0] < this.cfg.playerboard.size.w && v[1] >= 0 && v[1] < this.cfg.playerboard.size.h && !BoardHelper.getPlayerTiles(player).some(tile => BoardHelper.IsSameVertex(tile , v)));
     }
     isEndGame = () => {
-        return this.state.players.reduce((acc, curr) => acc + curr.position, 0) === (this.cfg.timeboard.size - 1) * this.state.players.length;
+        return this.state.players.reduce((acc, curr) => acc + curr.position, 0) === (this.cfg.timeline.size - 1) * this.state.players.length;
     }
     // GAME ACTIONS and HANDLERS
     performEndTurnActions = () => {
@@ -91,7 +92,7 @@ class Game extends Component {
             let checkpoints = state.checkpoints.slice();
             let patchIntent = state.patchIntent;
             // 1. Si el jugador ha llegado al final, asignar primer llegador, si es el primero
-            if (playersByStatus.active.position === this.cfg.timeboard.size - 1) {
+            if (playersByStatus.active.position === this.cfg.timeline.size - 1) {
                 playersByStatus.active.finishPosition = players.filter(p => p.finishPosition !== null).length + 1;
             }
             // 2. Determinar si ha pasado por algun chkpoint
@@ -174,7 +175,7 @@ class Game extends Component {
                     });
                 }
                 playersByStatus.active.position_before = playersByStatus.active.position;
-                playersByStatus.active.position = clamp(playersByStatus.active.position + state.patchIntent.cost.time, this.cfg.timeboard.size - 1);
+                playersByStatus.active.position = clamp(playersByStatus.active.position + state.patchIntent.cost.time, this.cfg.timeline.size - 1);
                 playersByStatus.active.money -= state.patchIntent.cost.money;                
                 return {
                     players,
@@ -196,26 +197,20 @@ class Game extends Component {
         this.setState(() => ({ patchDragging: false }));
     }
     handleRestart = () => {
-        this.setState({
-            players: this.generatePlayers(),
-            patchList: this.generatePatchList(),
-            bonuses: this.generateBonuses(),
-            patchIntent: null,
-            checkpoints: TimeBoardBaseLayout.checkpoints.map((cp, i) => Object.assign({ "id": `chk${i}` }, cp))
-        });
+        this.setState(() => this.getNewGame());
     }
     render = () => {
         return (
             this.isEndGame()
                 ? <EndGame players={this.state.players} size={this.cfg.playerboard.size} onRestart={this.handleRestart} />
                 : <div className="game">
-                    <TimeBoard players={this.state.players} checkpoints={this.state.checkpoints} size={this.cfg.timeboard.size} patchIntent={this.state.patchIntent} />
-                    <div className={`players ${this.state.players.find(p => p.playing).name}`}>
+                    <Timeline players={this.state.players} checkpoints={this.state.checkpoints} size={this.cfg.timeline.size} patchIntent={this.state.patchIntent} />
+                    <div className={`players ${this.state.players.find(p => p.playing).id}`}>
                     { this.state.players.map((player) =>
-                        <Player key={player.name} size={this.cfg.playerboard.size} player={player} patch={this.state.patchDragging && this.state.patchIntent} onPlacePatch={this.handlePlacePatch} />) }
+                        <Player key={player.id} size={this.cfg.playerboard.size} player={player} patch={this.state.patchDragging && this.state.patchIntent} onPlacePatch={this.handlePlacePatch} />) }
                     </div>
                     { this.state.patchIntent !== null
-                        ? <PatchEditor patch={this.state.patchIntent} onEdit={this.handleBuyPatchIntent} onCancel={this.handleReturnPatch} onDragStart={this.handleDragStart} onDragEnd={this.handleDragEnd} onDiscard={() => this.handlePlacePatch(null)} />
+                        ? <Editor patch={this.state.patchIntent} onEdit={this.handleBuyPatchIntent} onCancel={this.handleReturnPatch} onDragStart={this.handleDragStart} onDragEnd={this.handleDragEnd} onDiscard={() => this.handlePlacePatch(null)} />
                         : <Market playerAdvance={this.getPlayerAdvanceOnPass()} playerMoney={this.state.players.find(p => p.playing).money} patches={this.state.patchList} onBuyPatch={this.handleBuyPatchIntent} />
                     }
                     </div>

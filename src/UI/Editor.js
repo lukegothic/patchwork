@@ -1,6 +1,7 @@
 import React from 'react';
 import Patch from './Patch';
-import { MinReducer } from '../Reducers';
+import { MinReducer } from '../utils/Reducers';
+import './editor.css';
 const RotateCW = v => [-1 * v[1], v[0]];
 const RotateCCW = v => [v[1], -1 * v[0]];
 const FlipX = v => [v[0], -1 * v[1]];
@@ -19,8 +20,8 @@ const applyTransform = (patch, transformFn) => {
     patch.vertex = MoveToOrigin(patch.vertex.map(transformFn));
     return patch;
 }
-const PatchEditor = ({ patch, onEdit, onCancel, onDiscard, onDragStart, onDragEnd }) => {
-    return <div className="patchEditor">
+const Editor = ({ patch, onEdit, onCancel, onDiscard, onDragStart, onDragEnd }) => {
+    return <div className="editor">
         <div className="patchIntent" draggable="true" onDragStart={onDragStart} onDragEnd={onDragEnd}>
             <Patch patch={patch}></Patch>
         </div>
@@ -36,4 +37,4 @@ const PatchEditor = ({ patch, onEdit, onCancel, onDiscard, onDragStart, onDragEn
         }        
     </div>
 }
-export default PatchEditor;
+export default Editor;

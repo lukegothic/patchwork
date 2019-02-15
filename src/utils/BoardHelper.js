@@ -1,4 +1,4 @@
-import { Range } from './utils';
+import { Range } from '../utils';
 export const MoveVertex = (vertex, desv) => [vertex[0] + desv[0], vertex[1] + desv[1]];
 export const MoveVertices = (vertex, desv) => vertex.map(v => MoveVertex(v, desv) );
 export const MovePatch = (patch) => Object.assign({}, patch, { "vertex": MoveVertices(patch.vertex, patch.at)});

@@ -1,0 +1,40 @@
+.player .info.p0 strong {
+  color: rgb(0, 86, 167);
+}
+
+.player .info.p1 strong {
+  color: rgb(132, 0, 255);
+}
+
+.player .board {
+  background: url(https://via.placeholder.com/360);
+  background-size: cover;
+  position: relative;
+  display: inline-block;
+}
+
+.player .board svg {
+  pointer-events: none;
+}
+
+/* Patch Placer */
+.player .patchPlacer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.player .board .patchPlacer .tile {
+  opacity: 0.5;
+  position: absolute;
+}
+
+.player .board .patchPlacer .tile.invalid {
+  background-color: crimson;
+}
+
+.player .board .patchPlacer .tile.valid {
+  background-color: darkgreen;
+}

@@ -1,0 +1,8 @@
+/* BG */
+svg defs pattern > rect {
+  fill: #21409a;
+}
+/* STROKE */
+svg defs pattern > g {
+  fill: #f8a51b;
+}

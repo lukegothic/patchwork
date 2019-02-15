@@ -1,13 +1,13 @@
 import React from 'react';
-import SVGPolygon from './SVGPolygon';
-import { BlockSize } from '../Const';
-import * as PatchHelper from '../PatchHelper';
+import SVGPatch from './SVGPatch';
+import { BlockSize } from '../const';
+import * as PatchHelper from '../utils/PatchHelper';
 
 const Patch = ({ patch, onClick, children }) => {
     const { h, w } = PatchHelper.getDimensions(patch);
     return <React.Fragment>
                 <svg height={h*BlockSize} width={w*BlockSize} onClick={onClick}>
-                    <SVGPolygon fill={patch.fill} vertex={patch.vertex} />
+                    <SVGPatch fill={patch.fill} vertex={patch.vertex} />
                 </svg>
                 {children}
             </React.Fragment>

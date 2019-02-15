@@ -1,5 +1,5 @@
 import React from 'react';
-import { BlockSize } from '../Const';
+import { BlockSize } from '../const';
 const onDragOver = (e) => {
     e.stopPropagation();
     e.preventDefault();

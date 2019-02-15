@@ -1,0 +1,67 @@
+/* linea general */
+.timeline {
+  width: auto;
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+/* casilla */
+.timeline .step {
+  border: 2px solid black;
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  height: 40px;
+  width: 40px;
+}
+/* checkpoint */
+.timeline .checkpoint {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.timeline .checkpoint.patch {
+  background-color: rgba(78, 55, 12, 0.582);
+}
+
+.timeline .checkpoint.money {
+  background-color: rgba(90, 177, 248, 0.733)
+}
+/* marcador jugador */
+.timeline .step .player {
+  position: absolute;
+  border-radius: 50%;
+  height: 24px;
+  width: 24px;
+}
+
+.timeline .step .player.p0 {
+  background-color: rgb(0, 86, 167);
+  top: 1px;
+  left: 1px;
+}
+
+.timeline .step .player.p1 {
+  background-color: rgb(132, 0, 255);
+  top: 11px;
+  left: 11px;
+}
+/* marcador jugador futuro */
+.timeline .step .player.future {
+  -webkit-animation: fadeInOut 1s infinite linear;
+  animation: fadeInOut 1s infinite linear;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.25;
+  }
+}

@@ -1,0 +1,16 @@
+polygon.patch {
+    stroke: #21409a;
+    stroke-linecap: butt;
+    stroke-linejoin: round;
+    paint-order: stroke;
+}
+/* Estilo 'deshilachado', antes de comprar */
+.market polygon.patch, .editor polygon.patch {
+    stroke-width: 10;
+    stroke-dasharray: 2,3,1;
+}
+/* Estilo 'cosido' */
+.player polygon.patch {
+    stroke-width: 2;
+    stroke-dasharray: 1,1;
+}
