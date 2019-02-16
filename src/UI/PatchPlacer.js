@@ -15,14 +15,11 @@ class PatchPlacer extends Component {
         this.dropHandler = props.onPlacePatch;
         this.size = props.size;
         const patchSize = PatchHelper.getDimensions(this.patch);
-        this.effectiveSize = {      // calcular el tablero en donde se puede soltar la pieza, viene dado por el tablero original menos el tamano de la pieza
-            w: this.size.w - patchSize.w,
-            h: this.size.h - patchSize.h
-        };
+        this.effectiveSize = [this.size[0] - patchSize[0], this.size[1] - patchSize[1]]      // calcular el tablero en donde se puede soltar la pieza, viene dado por el tablero original menos el tamano de la pieza
     }
     handleHover = (tile) => {
         // calcular la posicion efectiva en la que se suelta la pieza, usando como limite el tablero efectivo
-        this.setState(() => ({ intent: [clamp(tile[0], this.effectiveSize.w), clamp(tile[1], this.effectiveSize.h)] }));
+        this.setState(() => ({ intent: [clamp(tile[0], this.effectiveSize[0]), clamp(tile[1], this.effectiveSize[1])] }));
     }
     handleDrop = () => {
         this.setState(state => {

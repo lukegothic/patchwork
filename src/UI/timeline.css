@@ -1,17 +1,16 @@
 /* linea general */
 .timeline {
-  width: auto;
-  overflow-x: scroll;
-  white-space: nowrap;
+  width: 100%;
 }
 /* casilla */
 .timeline .step {
-  border: 2px solid black;
+  border: 1px solid black;
+  border-left: 0;
   position: relative;
   display: inline-block;
   box-sizing: border-box;
   height: 40px;
-  width: 40px;
+  width: 10px;
 }
 /* checkpoint */
 .timeline .checkpoint {
@@ -33,20 +32,18 @@
 .timeline .step .player {
   position: absolute;
   border-radius: 50%;
-  height: 24px;
-  width: 24px;
+  height: 10px;
+  width: 10px;
 }
 
 .timeline .step .player.p0 {
   background-color: rgb(0, 86, 167);
-  top: 1px;
-  left: 1px;
+  top: 5px;
 }
 
 .timeline .step .player.p1 {
   background-color: rgb(132, 0, 255);
-  top: 11px;
-  left: 11px;
+  top: 20px;
 }
 /* marcador jugador futuro */
 .timeline .step .player.future {

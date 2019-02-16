@@ -4,9 +4,9 @@ import { BlockSize } from '../const';
 import * as PatchHelper from '../utils/PatchHelper';
 
 const Patch = ({ patch, onClick, children }) => {
-    const { h, w } = PatchHelper.getDimensions(patch);
+    const patchSize = PatchHelper.getDimensions(patch);
     return <React.Fragment>
-                <svg height={h*BlockSize} width={w*BlockSize} onClick={onClick}>
+                <svg width={patchSize[0]*BlockSize} height={patchSize[1]*BlockSize} onClick={onClick}>
                     <SVGPatch fill={patch.fill} vertex={patch.vertex} />
                 </svg>
                 {children}

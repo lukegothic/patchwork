@@ -27,7 +27,7 @@ export const BaseTimeline = {
     ]
 };
 export const BaseBonuses = [
-    { "id": "7_7_7", size: { "w": 7, "h": 7 }, points: 7 }
+    { "id": "7_7_7", size: [7, 7], points: 7 }
 ];
 export const BasePatches = [
     /* p1 */

@@ -21,10 +21,7 @@ class Game extends Component {
                 "size": BaseTimeline.size    // longitud de la partida, en casillas
             },
             playerboard: {                          // ancho y alto del tablero del jugador
-                "size": {
-                    "w": 9,
-                    "h": 9
-                }
+                "size": [9, 9]
             }
         }
     }
@@ -79,7 +76,7 @@ getNewGame = () => ({                                           // TODO: Por Con
     getListWithoutPatch = (patch, patchList) => patchList.filter(p => p.id !== patch.id);
     isLegalPlacement = (player, patch, at) => {
         const patchVertex = patch.vertex.map(v => [v[0] + at[0], v[1] + at[1]]);
-        return patchVertex.every(v => v[0] >= 0 && v[0] < this.cfg.playerboard.size.w && v[1] >= 0 && v[1] < this.cfg.playerboard.size.h && !BoardHelper.getPlayerTiles(player).some(tile => BoardHelper.IsSameVertex(tile , v)));
+        return patchVertex.every(v => v[0] >= 0 && v[0] < this.cfg.playerboard.size[0] && v[1] >= 0 && v[1] < this.cfg.playerboard.size[1] && !BoardHelper.getPlayerTiles(player).some(tile => BoardHelper.IsSameVertex(tile , v)));
     }
     isEndGame = () => {
         return this.state.players.reduce((acc, curr) => acc + curr.position, 0) === (this.cfg.timeline.size - 1) * this.state.players.length;

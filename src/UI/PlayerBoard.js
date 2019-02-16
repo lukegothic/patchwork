@@ -4,8 +4,8 @@ import React from 'react';
 import { BlockSize } from '../const';
 const PlayerBoard = ({ size, patches, children }) => {
     const vwSize = {
-        height: size.h * BlockSize,
-        width: size.w * BlockSize
+        width: size[0] * BlockSize,
+        height: size[1] * BlockSize        
     };
     return <div className="board" style={vwSize}>
                 <svg {...vwSize}>
