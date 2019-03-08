@@ -20,7 +20,7 @@ class Game extends Component {
             timeline:{
                 "size": BaseTimeline.size    // longitud de la partida, en casillas
             },
-            playerboard: {                          // ancho y alto del tablero del jugador
+            playerboard: {                   // ancho y alto del tablero del jugador
                 "size": [9, 9]
             }
         }

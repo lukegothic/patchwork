@@ -58,7 +58,7 @@
     * [ ] Tablero de tiempo
     * [ ] Pantalla fin
 * Juice it up
-    * [ ] Juice it
+    * [x] Juice it
     * [ ] More juice
     * [ ] Best juice
 * Replayability
